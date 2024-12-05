@@ -20,7 +20,15 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+
+          # Сборка
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
+
+      # Тесты
+      - name: Run tests with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
