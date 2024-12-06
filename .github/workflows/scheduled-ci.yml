@@ -5,6 +5,7 @@ on:
     # запуск по расписанию
     - cron: "30 12 * * 3"
     - cron: "00 22 * * 5"
+  workflow_dispatch: # ручная проверка
 
 permissions:
   contents: read
