@@ -1,0 +1,37 @@
+name: Scheduled Java CI
+
+on:
+  schedule:
+    # запуск по расписанию
+    - cron: "30 12 * * 3"
+    - cron: "00 22 * * 5"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # клонирование
+      - uses: actions/checkout@v3
+      
+      # настройка версии JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      # сборка с Gradle
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+      
+      # запуск тестов
+      - name: Run tests with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
